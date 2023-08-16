@@ -1,0 +1,320 @@
+#wrapper {
+    width: 900px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+}
+
+#welcome {
+    width: 100%;
+    /*    height: 100px;*/
+    border-bottom: 1px solid darkgray;
+    margin-bottom: 30px;
+}
+
+#welcome a {
+    text-align: center;
+    display: block;
+    margin: 10px 0;
+}
+
+#welcome a img {
+    height: 70px;
+}
+
+.start a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    width: 100px;
+    margin:0 auto;
+    background-color: green;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+#leftPanel {
+    float: left;
+    width: 230px;
+    padding: 10px;
+    border-right: 1px solid darkgray;
+    margin-right: 20px;
+    min-height: 600px;
+}
+
+#rightPanel {
+    display: block;
+    clear:right;
+}
+
+#productList {
+    margin-bottom: 40px;
+}
+
+#productList ul {
+    margin-left: -40px;
+}
+
+#productList ul li {
+    list-style: none;
+    font-size: 18px;
+    border-bottom: 1px solid darkgray;
+    padding: 10px;
+}
+
+#productList ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+#productList ul li a:hover {
+    text-decoration: underline;
+}
+
+.product {
+    float: left;
+    width: 17%;
+    margin-right: 29px;
+    padding:0 10px 12px;
+    box-shadow: 0px 1px 5px darkgray;
+    margin-bottom: 20px;
+}
+
+.product h4 {
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.product p,h4 {
+    text-align: center;
+}
+
+.product img {
+    height: 100px;
+    max-width: 80%;
+}
+
+.price {
+    font-weight: bold;
+    color: red;
+}
+
+.product a {
+    display: block;
+    padding: 10px;
+    border: 2px solid #627F9A;
+    width: 120px;
+    text-align: center;
+    margin: 0 auto;
+    color: #627F9A;
+    text-decoration: none;
+    background-color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.product a:hover {
+    color: white;
+    background-color: #627F9A;
+}
+
+#pagination {
+    width: 180px;
+    margin: 0 auto;
+}
+
+#pagination a {
+    display: block;
+    width: 15px;
+    float: left;
+    box-shadow: 0px 1px 5px darkgray;
+    margin: 20px 5px;
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+    text-align: center;
+}
+
+#nextButton a {
+    display: block;
+    padding: 10px;
+    border: 2px solid #627F9A;
+    width: 120px;
+    text-align: center;
+    margin: 50px auto;
+    color: #627F9A;
+    text-decoration: none;
+}
+
+.cartProduct {
+    position: relative;
+    padding-bottom: 20px;
+    border-bottom: 1px solid darkgray;
+    margin-bottom: 20px;
+}
+
+.cartProductDescription img {
+    width: 50px;
+    float: left;
+    margin-right: 10px;
+    display: block;
+}
+
+.cartProductDescription a {
+    font-size: 14px;
+    color: blue;
+    text-decoration: none;
+    display: block;
+    overflow: hidden;
+    padding-right: 17px;
+    cursor: pointer;
+}
+
+.cartProductDescription a span {
+    color: black;
+    line-height: 0.6em;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-decoration: none;
+    color:darkgray;
+    cursor: pointer;
+}
+
+.totalPrice {
+    text-align: center;
+    font-weight: bold;
+    color: darkgrey;
+}
+
+.totalPrice span {
+    color: black;
+}
+
+.clear {
+    clear: both;
+}
+
+
+/*--------Order----------*/
+
+.order, #notification {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px 0;
+    box-shadow: 0px 1px 5px darkgray;
+    margin-bottom: 30px;
+}
+
+.order h3 {
+    text-align: center;
+}
+
+.order table {
+    margin:0 auto;
+    width: 95%;
+    border-spacing: 0;
+    margin-bottom: 20px;
+}
+
+.order table th,td {
+    padding: 0.5em;
+    text-align: left;
+    border-bottom: 1px solid #ececec;
+}
+
+.order table th {
+    font-weight: bold;
+    border-bottom: 2px solid #ececec;
+}
+
+.order table thead {
+    border-bottom: 1px solid darkgray;
+    padding-bottom: 20px;
+}
+
+.order table tr {
+    padding-bottom: 100px;
+}
+
+.order table tr:last-child td {
+    font-weight: bold;
+}
+
+.buttons a, #notification a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    background-color: #000000;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.buttons a:first-child {
+    float: left;
+    width: 80px;
+    margin: 0 28px;
+}
+
+.buttons a:last-child {
+    width: 200px;
+    float: left;
+}
+
+
+/*-------Message--------*/
+
+#notification {
+    text-align: center;
+}
+
+#notification p {
+    margin-bottom: 30px;
+}
+
+#notification a {
+    width: 100px;
+    margin: 0 auto;
+}
+
+
+/*-------Admin---------*/
+
+.decision a {
+    float: left;
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    margin: 0 42px;
+    font-weight: bold;
+}
+
+.decision a:first-child {
+    background-color: green;
+}
+
+.decision a:last-child {
+    background-color: red;
+}
+
+.result a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    width: 100px;
+    margin:0 auto;
+    background-color: green;
+    text-align: center;
+    font-weight: bold;
+}
+
+.order h3 .doneNotif {
+    color: blue;
+}

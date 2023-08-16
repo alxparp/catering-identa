@@ -1,0 +1,156 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-initial-queries
+      author: Alex
+      changes:
+        - insert:
+            tableName: category
+            columns:
+              - column:
+                  name: name
+                  value: Перше
+
+        - insert:
+            tableName: category
+            columns:
+              - column:
+                  name: name
+                  value: Друге
+
+        - insert:
+            tableName: category
+            columns:
+              - column:
+                  name: name
+                  value: Десерт
+
+        - insert:
+            tableName: category
+            columns:
+              - column:
+                  name: name
+                  value: Салат
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Борщ український зі сметаною
+              - column:
+                  name: price
+                  value: 210.00
+              - column:
+                  name: img
+                  value: borsh.jpg
+              - column:
+                  name: category_id
+                  value: 1
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Суп овочевий
+              - column:
+                  name: price
+                  value: 210.00
+              - column:
+                  name: img
+                  value: sup.jpg
+              - column:
+                  name: category_id
+                  value: 1
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Салат Цезар
+              - column:
+                  name: price
+                  value: 210.00
+              - column:
+                  name: img
+                  value: cesar.jpg
+              - column:
+                  name: category_id
+                  value: 4
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Борщ український зі сметаною
+              - column:
+                  name: price
+                  value: 210.00
+              - column:
+                  name: img
+                  value: borsh.jpg
+              - column:
+                  name: category_id
+                  value: 1
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Суп овочевий
+              - column:
+                  name: price
+                  value: 210.00
+              - column:
+                  name: img
+                  value: sup.jpg
+              - column:
+                  name: category_id
+                  value: 1
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Салат Цезар
+              - column:
+                  name: price
+                  value: 210.00
+              - column:
+                  name: img
+                  value: cesar.jpg
+              - column:
+                  name: category_id
+                  value: 4
+
+        - insert:
+            tableName: confirmation
+            columns:
+              - column:
+                  name: name
+                  value: CONFIRMED
+
+        - insert:
+            tableName: confirmation
+            columns:
+              - column:
+                  name: name
+                  value: DECLINED
+
+        - insert:
+            tableName: status
+            columns:
+              - column:
+                  name: name
+                  value: IN_PROCESS
+
+        - insert:
+            tableName: status
+            columns:
+              - column:
+                  name: name
+                  value: DONE
