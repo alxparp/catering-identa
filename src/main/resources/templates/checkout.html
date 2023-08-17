@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div id="wrapper">
+    <div id="welcome">
+        <a href=""><img th:src="@{/img/logo.jpg}" alt=""></a>
+    </div>
+    <div class="order">
+        <h3>Ваше замовлення</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Товар</th>
+                <th>Сума</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="item: ${order.getOrderItems()}">
+                <tr>
+                    <td>
+                        <span th:text="${item.getProductDTO().name}"></span>
+                        <span th:text="${' *' + item.quantity}"></span>
+                    </td>
+                    <td th:text="${item.quantity*item.getProductDTO().price + ' грн'}">427.50 грн</td>
+                </tr>
+            </th:block>
+            <tr>
+                <td>Сума</td>
+                <td th:text="${order.getSum() + ' грн'}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="buttons">
+            <a th:href="@{/main/products}">Назад</a>
+            <a th:href="@{/main/approve}">Підтвердити замовлення</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+</body>
+</html>

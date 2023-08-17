@@ -1,0 +1,190 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-app-tables
+      author: Alex
+      changes:
+
+        - createTable:
+            tableName: category
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: product
+            columns:
+              - column:
+                  name: product_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: img
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: status
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: confirmation
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: order_item
+            columns:
+              - column:
+                  name: order_item_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: order_id
+                  type: bigint
+              - column:
+                  name: product_id
+                  type: bigint
+              - column:
+                  name: quantity
+                  type: int
+
+        - createTable:
+            tableName: order_t
+            columns:
+              - column:
+                  name: order_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+#              - column:
+#                  name: product_id
+#                  type: bigint
+#                  constraints:
+#                    nullable: false
+              - column:
+                  name: created
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sum
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: confirmation_id
+                  type: bigint
+#                  constraints:
+#                    nullable: false
+              - column:
+                  name: status_id
+                  type: bigint
+#                  constraints:
+#                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseColumnNames: category_id
+            baseTableName: product
+            constraintName: fk_product_category
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: category
+            validate: true
+
+        - addForeignKeyConstraint:
+            baseColumnNames: product_id
+            baseTableName: order_item
+            constraintName: fk_op_product
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: product_id
+            referencedTableName: product
+            validate: true
+
+        - addForeignKeyConstraint:
+            baseColumnNames: order_id
+            baseTableName: order_item
+            constraintName: fk_op_order
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: order_id
+            referencedTableName: order_t
+            validate: true
+
+        - addForeignKeyConstraint:
+            baseColumnNames: status_id
+            baseTableName: order_t
+            constraintName: fk_order_status
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: status
+            validate: true
+
+        - addForeignKeyConstraint:
+            baseColumnNames: confirmation_id
+            baseTableName: order_t
+            constraintName: fk_order_confirmation
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: confirmation
+            validate: true

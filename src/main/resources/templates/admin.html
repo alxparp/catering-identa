@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Адмін - всі замовлення</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div id="wrapper">
+  <div id="welcome">
+    <a href=""><img src="img/logo.jpg" alt=""></a>
+  </div>
+
+  <div id="notConfirmed"></div>
+
+  <th:block th:each="order: ${ordersConfirmed}">
+    <div class="order">
+      <h3 th:text="${'Замовлення №' + order.getId()}"></h3>
+      <table>
+        <thead>
+        <tr>
+          <th>Товар</th>
+          <th>Сума</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="productItem: ${order.getOrderItems()}">
+          <tr>
+            <td>
+              <span th:text="${productItem.getProductDTO().name}"></span>
+              <span th:text="${' *' + productItem.getQuantity()}"></span>
+            </td>
+            <td th:text="${productItem.getProductDTO().price*productItem.getQuantity() + ' грн'}"></td>
+          </tr>
+        </th:block>
+        <tr>
+          <td>Сумма</td>
+          <td th:text="${order.getSum() + ' грн'}"></td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="result">
+        <a th:href="@{${'/admin/done?id=' + order.getId()}}">Виконано</a>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </th:block>
+
+  <div class="order" th:each="order: ${ordersDone}">
+    <h3>
+      <span th:text="${'Замовлення №' + order.getId()}"></span>
+      <span class="doneNotif">(виконано)</span>
+    </h3>
+    <div class="clear"></div>
+  </div>
+
+  <script type="text/javascript"
+          src="webjars/jquery/2.2.4/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/admin.js"></script>
+</div>
+</body>
+</html>
