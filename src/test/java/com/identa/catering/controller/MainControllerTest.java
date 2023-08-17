@@ -68,7 +68,7 @@ class MainControllerTest {
         ResultActions result = performRequest(mapper.writeValueAsString(item), urlAddProduct);
         result.andExpect(status().is4xxClientError());
 
-        item.setId(20L);
+        item.setId(Long.MAX_VALUE);
         mapper.writeValueAsString(item);
         result = performRequest(mapper.writeValueAsString(item), urlAddProduct);
         result.andExpect(status().is4xxClientError());
