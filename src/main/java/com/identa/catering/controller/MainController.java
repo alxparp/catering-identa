@@ -1,5 +1,6 @@
 package com.identa.catering.controller;
 
+import com.identa.catering.entity.Order;
 import com.identa.catering.model.*;
 import com.identa.catering.model.dto.CategoryDTO;
 import com.identa.catering.model.dto.OrderDTO;
@@ -53,9 +54,23 @@ public class MainController {
     public String products(@RequestParam(value = "id", required = false) Long id,
                            Model model) {
 
-        CategoryDTO categoryDTO = (id == null || !categoryService.containsId(id)) ? categoryService.findFirst() : categoryService.findById(id);
+        CategoryDTO categoryDTO = (id == null || !categoryService.containsId(id))
+                ? categoryService.findFirst()
+                : categoryService.findById(id);
         model.addAllAttributes(getSelectObjects(categoryDTO));
         return "products";
+    }
+
+    private Map<String, ?> getSelectObjects(CategoryDTO categoryDTO) {
+        Map<String, Object> selectObjects = new HashMap<>();
+        selectObjects.put("categories", categories = (categories == null)
+                ? categoryService.findAll()
+                : categories);
+        selectObjects.put("products", categoryDTO != null
+                ? productService.findByCategory(categoryDTO)
+                : new ArrayList<>());
+        selectObjects.put("order", orderDTO);
+        return selectObjects;
     }
 
     @GetMapping(value = "/displayCart")
@@ -76,36 +91,6 @@ public class MainController {
         return deleteOrAddProductToCart(item, errors, true);
     }
 
-    @GetMapping("/checkout")
-    public String checkout(Model model) {
-        if (orderDTO.getOrderItems().isEmpty())
-            return redirectProducts;
-        model.addAttribute("order", orderDTO);
-        return "checkout";
-    }
-
-    @GetMapping("/approve")
-    public String approveOrder() {
-        if (orderDTO.getOrderItems().isEmpty())
-            return redirectProducts;
-        orderService.save(orderDTO);
-        initOrder();
-        return "message";
-    }
-
-    private void initOrder() {
-        orderDTO = new OrderDTO();
-        orderDTO.setOrderItems(new ArrayList<>());
-    }
-
-    private Map<String, ?> getSelectObjects(CategoryDTO categoryDTO) {
-        Map<String, Object> selectObjects = new HashMap<>();
-        selectObjects.put("categories", categories = (categories == null) ? categoryService.findAll() : categories);
-        selectObjects.put("products", categoryDTO != null ? productService.findByCategory(categoryDTO) : new ArrayList<>());
-        selectObjects.put("order", orderDTO);
-        return selectObjects;
-    }
-
     private ResponseEntity<?> deleteOrAddProductToCart(Item item, Errors errors, boolean flag) {
         AjaxResponseBody result = new AjaxResponseBody();
         ResponseEntity<?> response = checkErrors(item, errors, result);
@@ -121,6 +106,25 @@ public class MainController {
         orderDTO.setSum(orderItemService.calculateItemsSum(orderItemDTOS));
 
         return getResult(result);
+    }
+
+    private ResponseEntity<?> checkErrors(Item item,
+                                          Errors errors,
+                                          AjaxResponseBody result) {
+        if (errors.hasErrors()) {
+            result.setMsg(errors.getAllErrors()
+                    .stream().map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.joining(",")));
+
+            return ResponseEntity.badRequest().body(result);
+        }
+
+        if (!productService.containsId(item.getId())) {
+            result.setMsg("Such product doesn't exist");
+            return ResponseEntity.badRequest().body(result);
+        }
+
+        return null;
     }
 
     private void addOrderItem(List<OrderItemDTO> orderItemDTOS, ProductDTO productDTO) {
@@ -147,29 +151,35 @@ public class MainController {
         }
     }
 
+    @GetMapping("/checkout")
+    public String checkout(Model model) {
+        if (orderDTO.getOrderItems().isEmpty())
+            return redirectProducts;
+        model.addAttribute("order", orderDTO);
+        return "checkout";
+    }
+
+    @GetMapping("/approve")
+    public String approveOrder(Model model) {
+        if (orderDTO.getOrderItems().isEmpty())
+            return redirectProducts;
+        Order order = orderService.save(orderDTO);
+        model.addAttribute("orderId", order.getId());
+        initOrder();
+        return "message";
+    }
+
+    private void initOrder() {
+        orderDTO = new OrderDTO();
+        orderDTO.setOrderItems(new ArrayList<>());
+    }
+
     private ResponseEntity<?> getResult(AjaxResponseBody result) {
         result.setResult(orderDTO);
         result.setMsg("Success");
         return ResponseEntity.ok(result);
     }
 
-    private ResponseEntity<?> checkErrors(Item item,
-                                          Errors errors,
-                                          AjaxResponseBody result) {
-        if (errors.hasErrors()) {
-            result.setMsg(errors.getAllErrors()
-                    .stream().map(DefaultMessageSourceResolvable::getDefaultMessage)
-                    .collect(Collectors.joining(",")));
 
-            return ResponseEntity.badRequest().body(result);
-        }
-
-        if (!productService.containsId(item.getId())) {
-            result.setMsg("Such product doesn't exist");
-            return ResponseEntity.badRequest().body(result);
-        }
-
-        return null;
-    }
 
 }

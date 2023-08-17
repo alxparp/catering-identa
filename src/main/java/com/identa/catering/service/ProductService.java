@@ -19,7 +19,8 @@ public class ProductService {
     }
 
     public ProductDTO findById(Long id) {
-        return ProductConverter.productToDTO(productRepository.findById(id).orElseThrow());
+        return ProductConverter.productToDTO(
+                productRepository.findById(id).orElseThrow());
     }
 
     public boolean containsId(Long id) {
@@ -27,10 +28,10 @@ public class ProductService {
     }
 
     public List<ProductDTO> findByCategory(CategoryDTO category) {
-        return productRepository.findByCategory(CategoryConverter.DTOToCategory(category))
+        return productRepository.findByCategory(
+                CategoryConverter.DTOToCategory(category))
                 .stream()
                 .map(ProductConverter::productToDTO)
                 .toList();
     }
-
 }

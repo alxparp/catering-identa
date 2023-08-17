@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Select products</title>
+  <title>Вибір страв</title>
   <link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
@@ -12,7 +12,7 @@
   </div>
   <div id="leftPanel">
     <div id="productList">
-      <h3>Категорії товарів</h3>
+      <h3>Категорії страв</h3>
       <ul>
         <th:block th:each="category: ${categories}">
           <li><a th:href="@{${'/main/products?id=' + category.getId()}}" th:text="${category.name}">First</a></li>

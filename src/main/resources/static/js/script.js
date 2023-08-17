@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function addToCart(event, productId) {
-    console.log("hello!!!")
     event.preventDefault();
     var products = {};
     products['id'] = productId;
@@ -36,7 +35,6 @@ function addToCart(event, productId) {
             displayCart(data, cart);
         },
     });
-
 }
 
 function deleteProductFromCart(productId) {
@@ -66,7 +64,7 @@ function displayCart(data, cart) {
         cart.innerHTML = "";
         return;
     }
-    var result = "<h3>Кошик з продуктами</h3>";
+    var result = "<h3>Кошик зі стравами</h3>";
     $.each(data.result.orderItems, function (index, value) {
         result += "<div class='cartProduct'>";
         result += "     <div class='cartProductDescription'>";

@@ -113,11 +113,6 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-#              - column:
-#                  name: product_id
-#                  type: bigint
-#                  constraints:
-#                    nullable: false
               - column:
                   name: created
                   type: date
@@ -131,13 +126,9 @@ databaseChangeLog:
               - column:
                   name: confirmation_id
                   type: bigint
-#                  constraints:
-#                    nullable: false
               - column:
                   name: status_id
                   type: bigint
-#                  constraints:
-#                    nullable: false
 
         - addForeignKeyConstraint:
             baseColumnNames: category_id

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Повідомлення</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
@@ -12,7 +12,10 @@
     </div>
     <div id="notification">
         <h3>Повідомлення</h3>
-        <p>Ваше замовлення обробляється</p>
+        <p>
+            <span>Ваше замовлення обробляється: </span>
+            <span th:text="${'№' + orderId}"></span>
+            </p>
         <a th:href="@{/}">Завершити</a>
         <div class="clear"></div>
     </div>
