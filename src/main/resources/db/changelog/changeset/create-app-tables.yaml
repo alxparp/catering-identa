@@ -84,10 +84,10 @@ databaseChangeLog:
                     nullable: false
 
         - createTable:
-            tableName: order_product
+            tableName: order_item
             columns:
               - column:
-                  name: order_product_id
+                  name: order_item_id
                   type: bigint
                   autoIncrement: true
                   constraints:
@@ -151,7 +151,7 @@ databaseChangeLog:
 
         - addForeignKeyConstraint:
             baseColumnNames: product_id
-            baseTableName: order_product
+            baseTableName: order_item
             constraintName: fk_op_product
             onDelete: CASCADE
             onUpdate: RESTRICT
@@ -161,7 +161,7 @@ databaseChangeLog:
 
         - addForeignKeyConstraint:
             baseColumnNames: order_id
-            baseTableName: order_product
+            baseTableName: order_item
             constraintName: fk_op_order
             onDelete: CASCADE
             onUpdate: RESTRICT

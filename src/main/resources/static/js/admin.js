@@ -26,13 +26,13 @@ function getNotConfirmedOrders() {
                     result += "<span>" + itemValue.productDTO.name + "</span>";
                     result += "<span> *" + itemValue.quantity + "</span>";
                     result += "</td>";
-                    result += "<td>" + (itemValue.productDTO.price*itemValue.quantity) + "</td>";
+                    result += "<td>" + (itemValue.productDTO.price*itemValue.quantity) + " грн</td>";
                     result += "</tr>";
                 });
 
                 result += "<tr>";
-                result += "<td>Сумма</td>";
-                result += "<td>" + value.sum + "</td>";
+                result += "<td>Сума</td>";
+                result += "<td>" + value.sum + " грн</td>";
                 result += "</tr>";
 
                 result += "</tbody>";

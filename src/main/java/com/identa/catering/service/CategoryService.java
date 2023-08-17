@@ -28,6 +28,10 @@ public class CategoryService {
     }
 
     public CategoryDTO findFirst() {
-        return CategoryConverter.categoryToDTO(categoryRepository.findFirstByOrderById());
+        return CategoryConverter.categoryToDTO(categoryRepository.findFirstByOrderById().orElseThrow());
+    }
+
+    public boolean containsId(Long id) {
+        return categoryRepository.existsById(id);
     }
 }

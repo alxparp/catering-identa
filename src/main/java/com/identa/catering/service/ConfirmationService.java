@@ -15,6 +15,6 @@ public class ConfirmationService {
     }
 
     public Confirmation findByType(ConfirmationType confirmationType) {
-        return confirmationRepository.findByName(confirmationType.name());
+        return confirmationRepository.findByName(confirmationType.name()).orElseThrow();
     }
 }

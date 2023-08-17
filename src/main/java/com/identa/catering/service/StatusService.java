@@ -15,6 +15,6 @@ public class StatusService {
     }
 
     public Status findByType(StatusType statusType) {
-        return statusRepository.findByName(statusType.name());
+        return statusRepository.findByName(statusType.name()).orElseThrow();
     }
 }

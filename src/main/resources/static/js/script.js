@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: "/displayCart",
+        url: "/main/displayCart",
         dataType: "json",
         cache: false,
         timeout: 600000,
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function addToCart(event, productId) {
-
+    console.log("hello!!!")
     event.preventDefault();
     var products = {};
     products['id'] = productId;
@@ -27,7 +27,7 @@ function addToCart(event, productId) {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/addProductToCart",
+        url: "/main/addProductToCart",
         data: JSON.stringify(products),
         dataType: "json",
         cache: false,
@@ -48,7 +48,7 @@ function deleteProductFromCart(productId) {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/deleteFromCart",
+        url: "/main/deleteFromCart",
         data: JSON.stringify(products),
         dataType: "json",
         cache: false,

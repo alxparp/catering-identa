@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Item {
 
     @NotNull(message = "Id can't be null!")
-    @Min(value = 0, message = "Value can't be less than 0")
+    @Min(value = 1, message = "Value can't be less than 1")
     private Long id;
 
 }

@@ -30,12 +30,12 @@
               <span th:text="${productItem.getProductDTO().name}"></span>
               <span th:text="${' *' + productItem.getQuantity()}"></span>
             </td>
-            <td th:text="${productItem.getProductDTO().price*productItem.getQuantity()}"></td>
+            <td th:text="${productItem.getProductDTO().price*productItem.getQuantity() + ' грн'}"></td>
           </tr>
         </th:block>
         <tr>
           <td>Сумма</td>
-          <td th:text="${order.getSum()}"></td>
+          <td th:text="${order.getSum() + ' грн'}"></td>
         </tr>
         </tbody>
       </table>
@@ -56,7 +56,7 @@
 
   <script type="text/javascript"
           src="webjars/jquery/2.2.4/jquery.min.js"></script>
-  <script type="text/javascript" src="js/admin.js"></script>
+  <script type="text/javascript" src="/js/admin.js"></script>
 </div>
 </body>
 </html>

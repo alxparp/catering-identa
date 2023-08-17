@@ -15,7 +15,7 @@
       <h3>Категорії товарів</h3>
       <ul>
         <th:block th:each="category: ${categories}">
-          <li><a th:href="@{${'/products?id=' + category.getId()}}" th:text="${category.name}">First</a></li>
+          <li><a th:href="@{${'/main/products?id=' + category.getId()}}" th:text="${category.name}">First</a></li>
         </th:block>
       </ul>
     </div>
@@ -29,7 +29,7 @@
       <div class="product" th:each="product: ${products}">
         <p><img th:src="@{${'/img/' + product.getImg()}}"></p>
         <h4 th:text="${product.getName()}">Борщ український зі сметаною</h4>
-        <p th:text="${'Ціна ' + product.getPrice() + 'грн'}" class="price">Ціна 210 грн</p>
+        <p th:text="${'Ціна ' + product.getPrice() + ' грн'}" class="price">Ціна 210 грн</p>
         <a th:onclick="'addToCart(event,' + ${product.getId()} + ')'">Додати в кошик</a>
       </div>
     </div>
@@ -37,14 +37,15 @@
     <div class="clear"></div>
   </div>
   <div id="nextButton">
-    <a th:href="@{/checkout}">Next</a>
+    <a th:href="@{/}">Назад</a>
+    <a th:href="@{/main/checkout}">Далі</a>
   </div>
   <div class="clear"></div>
 </div>
 
 <script type="text/javascript"
-        src="webjars/jquery/2.2.4/jquery.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
+        src="/webjars/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="/js/script.js"></script>
 
 </body>
 </html>

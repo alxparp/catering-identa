@@ -26,6 +26,7 @@ import static com.identa.catering.entity.enums.StatusType.IN_PROCESS;
 public class AdminController {
 
     private final OrderService orderService;
+    private final String redirectAdmin = "redirect:/admin";
 
     public AdminController(OrderService orderService) {
         this.orderService = orderService;
@@ -61,13 +62,20 @@ public class AdminController {
     @GetMapping("/done")
     public String done(@RequestParam(value = "id", required = false) Long id,
                                Model model) {
+        if(!isValidId(id)) return redirectAdmin;
         OrderDTO orderDTO = orderService.findById(id);
         orderDTO.setStatus(DONE);
 
         return updateAndGoToAdmin(orderDTO, model);
     }
 
+    private boolean isValidId(Long id) {
+        if (id == null || id < 1 || !orderService.containsId(id)) return false;
+        return true;
+    }
+
     private String handleAndGoToAdmin(ConfirmationType confirmationType, Model model, Long id) {
+        if(!isValidId(id)) return redirectAdmin;
         OrderDTO orderDTO = orderService.findById(id);
         orderDTO.setConfirmation(confirmationType);
         orderDTO.setStatus(IN_PROCESS);
@@ -79,7 +87,7 @@ public class AdminController {
         orderService.update(orderDTO);
         model.addAllAttributes(getSelectObjects());
 
-        return "redirect:/admin";
+        return redirectAdmin;
     }
 
     private Map<String, ?> getSelectObjects() {

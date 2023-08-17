@@ -30,14 +30,14 @@
                 </tr>
             </th:block>
             <tr>
-                <td>Сумма</td>
+                <td>Сума</td>
                 <td th:text="${order.getSum() + ' грн'}"></td>
             </tr>
             </tbody>
         </table>
         <div class="buttons">
-            <a th:href="@{/products}">Назад</a>
-            <a th:href="@{/approve}">Підтвердити замовлення</a>
+            <a th:href="@{/main/products}">Назад</a>
+            <a th:href="@{/main/approve}">Підтвердити замовлення</a>
         </div>
         <div class="clear"></div>
     </div>

@@ -136,15 +136,23 @@
     text-align: center;
 }
 
+#nextButton {
+    width: 390px;
+    margin: 50px auto;
+    padding-bottom: 50px;
+}
+
 #nextButton a {
     display: block;
     padding: 10px;
     border: 2px solid #627F9A;
     width: 120px;
     text-align: center;
-    margin: 50px auto;
     color: #627F9A;
     text-decoration: none;
+    float:left;
+    margin-right: 25px;
+    margin-left: 25px;
 }
 
 .cartProduct {

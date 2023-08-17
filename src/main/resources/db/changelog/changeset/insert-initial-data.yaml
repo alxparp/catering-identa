@@ -52,6 +52,22 @@ databaseChangeLog:
             columns:
               - column:
                   name: name
+                  value: Гороховий суп
+              - column:
+                  name: price
+                  value: 170.00
+              - column:
+                  name: img
+                  value: gor-sup.jpg
+              - column:
+                  name: category_id
+                  value: 1
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
                   value: Суп овочевий
               - column:
                   name: price
@@ -62,6 +78,246 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 1
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Сирний суп по-французьки з куркою
+              - column:
+                  name: price
+                  value: 230.50
+              - column:
+                  name: img
+                  value: syr-sup.jpg
+              - column:
+                  name: category_id
+                  value: 1
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Окрошка
+              - column:
+                  name: price
+                  value: 190.30
+              - column:
+                  name: img
+                  value: okroshka.jpg
+              - column:
+                  name: category_id
+                  value: 1
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Розсольник
+              - column:
+                  name: price
+                  value: 225.00
+              - column:
+                  name: img
+                  value: rozsolnyk.jpg
+              - column:
+                  name: category_id
+                  value: 1
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Макарони по-флотськи
+              - column:
+                  name: price
+                  value: 125.00
+              - column:
+                  name: img
+                  value: makarony-po-flotsky.jpg
+              - column:
+                  name: category_id
+                  value: 2
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Гратен Дофінуа
+              - column:
+                  name: price
+                  value: 125.00
+              - column:
+                  name: img
+                  value: graten.jpg
+              - column:
+                  name: category_id
+                  value: 2
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Гречаники
+              - column:
+                  name: price
+                  value: 125.00
+              - column:
+                  name: img
+                  value: grechanyky.jpg
+              - column:
+                  name: category_id
+                  value: 2
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Пишні оладки на кефірі
+              - column:
+                  name: price
+                  value: 125.00
+              - column:
+                  name: img
+                  value: pyshni-oladky.jpg
+              - column:
+                  name: category_id
+                  value: 2
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Хінкалі
+              - column:
+                  name: price
+                  value: 125.00
+              - column:
+                  name: img
+                  value: hinkali.jpg
+              - column:
+                  name: category_id
+                  value: 2
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Корейка на кістці в духовці
+              - column:
+                  name: price
+                  value: 125.00
+              - column:
+                  name: img
+                  value: koreyka.jpg
+              - column:
+                  name: category_id
+                  value: 2
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Листкове тісто
+              - column:
+                  name: price
+                  value: 125.00
+              - column:
+                  name: img
+                  value: lystkove-tisto.jpg
+              - column:
+                  name: category_id
+                  value: 3
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Какао на молоці
+              - column:
+                  name: price
+                  value: 125.00
+              - column:
+                  name: img
+                  value: kakao-napiy.jpg
+              - column:
+                  name: category_id
+                  value: 3
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Рогалики на смальці
+              - column:
+                  name: price
+                  value: 125.00
+              - column:
+                  name: img
+                  value: croissants.jpg
+              - column:
+                  name: category_id
+                  value: 3
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Кекси на кефірі
+              - column:
+                  name: price
+                  value: 125.00
+              - column:
+                  name: img
+                  value: keksy-na-kefiri.jpg
+              - column:
+                  name: category_id
+                  value: 3
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Медовик зі сметанним кремом
+              - column:
+                  name: price
+                  value: 125.00
+              - column:
+                  name: img
+                  value: medovyk.jpg
+              - column:
+                  name: category_id
+                  value: 3
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Пахлава
+              - column:
+                  name: price
+                  value: 125.00
+              - column:
+                  name: img
+                  value: pakhlava.jpg
+              - column:
+                  name: category_id
+                  value: 3
 
         - insert:
             tableName: product
@@ -84,45 +340,77 @@ databaseChangeLog:
             columns:
               - column:
                   name: name
-                  value: Борщ український зі сметаною
+                  value: Салат айсберг
               - column:
                   name: price
                   value: 210.00
               - column:
                   name: img
-                  value: borsh.jpg
+                  value: iceberg.jpg
               - column:
                   name: category_id
-                  value: 1
+                  value: 4
 
         - insert:
             tableName: product
             columns:
               - column:
                   name: name
-                  value: Суп овочевий
+                  value: Грецький салат
               - column:
                   name: price
                   value: 210.00
               - column:
                   name: img
-                  value: sup.jpg
+                  value: gretskiy.jpg
               - column:
                   name: category_id
-                  value: 1
+                  value: 4
 
         - insert:
             tableName: product
             columns:
               - column:
                   name: name
-                  value: Салат Цезар
+                  value: Табуле
               - column:
                   name: price
                   value: 210.00
               - column:
                   name: img
-                  value: cesar.jpg
+                  value: tabule.jpg
+              - column:
+                  name: category_id
+                  value: 4
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Салат Ніцца
+              - column:
+                  name: price
+                  value: 210.00
+              - column:
+                  name: img
+                  value: salat-nizza.jpg
+              - column:
+                  name: category_id
+                  value: 4
+
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: name
+                  value: Салат “Мімоза”
+              - column:
+                  name: price
+                  value: 210.00
+              - column:
+                  name: img
+                  value: mimoza.jpg
               - column:
                   name: category_id
                   value: 4

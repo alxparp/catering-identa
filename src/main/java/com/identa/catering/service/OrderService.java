@@ -29,14 +29,14 @@ public class OrderService {
         this.statusService = statusService;
     }
 
-    public void save(OrderDTO orderDTO) {
+    public Order save(OrderDTO orderDTO) {
         Order order = OrderConverter.DTOToOrder(orderDTO);
         order.setCreated(Date.valueOf(LocalDate.now()));
         if (orderDTO.getConfirmation() != null)
             order.setConfirmation(confirmationService.findByType(orderDTO.getConfirmation()));
         if (orderDTO.getStatus() != null)
             order.setStatus(statusService.findByType(orderDTO.getStatus()));
-        orderRepository.save(order);
+        return orderRepository.save(order);
     }
 
     public List<OrderDTO> findNotConfirmed() {
@@ -66,5 +66,9 @@ public class OrderService {
 
     public void update(OrderDTO orderDTO) {
         save(orderDTO);
+    }
+
+    public boolean containsId(Long id) {
+        return orderRepository.existsById(id);
     }
 }
