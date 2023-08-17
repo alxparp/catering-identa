@@ -59,21 +59,6 @@ public class AdminController {
         return handleAndGoToAdmin(DECLINED, model, id);
     }
 
-    @GetMapping("/done")
-    public String done(@RequestParam(value = "id", required = false) Long id,
-                               Model model) {
-        if(!isValidId(id)) return redirectAdmin;
-        OrderDTO orderDTO = orderService.findById(id);
-        orderDTO.setStatus(DONE);
-
-        return updateAndGoToAdmin(orderDTO, model);
-    }
-
-    private boolean isValidId(Long id) {
-        if (id == null || id < 1 || !orderService.containsId(id)) return false;
-        return true;
-    }
-
     private String handleAndGoToAdmin(ConfirmationType confirmationType, Model model, Long id) {
         if(!isValidId(id)) return redirectAdmin;
         OrderDTO orderDTO = orderService.findById(id);
@@ -88,6 +73,21 @@ public class AdminController {
         model.addAllAttributes(getSelectObjects());
 
         return redirectAdmin;
+    }
+
+    @GetMapping("/done")
+    public String done(@RequestParam(value = "id", required = false) Long id,
+                               Model model) {
+        if(!isValidId(id)) return redirectAdmin;
+        OrderDTO orderDTO = orderService.findById(id);
+        orderDTO.setStatus(DONE);
+
+        return updateAndGoToAdmin(orderDTO, model);
+    }
+
+    private boolean isValidId(Long id) {
+        if (id == null || id < 1 || !orderService.containsId(id)) return false;
+        return true;
     }
 
     private Map<String, ?> getSelectObjects() {

@@ -14,7 +14,7 @@ function getNotConfirmedOrders() {
                 result += "<table>";
                 result += "     <thead>";
                 result += "<tr>";
-                result += "<th>Товар</th>";
+                result += "<th>Страва</th>";
                 result += "<th>Сума</th>";
                 result += "</tr>";
                 result += "</thead>";

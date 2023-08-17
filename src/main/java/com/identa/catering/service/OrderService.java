@@ -33,7 +33,8 @@ public class OrderService {
         Order order = OrderConverter.DTOToOrder(orderDTO);
         order.setCreated(Date.valueOf(LocalDate.now()));
         if (orderDTO.getConfirmation() != null)
-            order.setConfirmation(confirmationService.findByType(orderDTO.getConfirmation()));
+            order.setConfirmation(
+                    confirmationService.findByType(orderDTO.getConfirmation()));
         if (orderDTO.getStatus() != null)
             order.setStatus(statusService.findByType(orderDTO.getStatus()));
         return orderRepository.save(order);
@@ -47,7 +48,8 @@ public class OrderService {
     }
 
     public List<OrderDTO> findConfirmed() {
-        return orderRepository.findByConfirmation_NameAndStatus_Name(CONFIRMED.name(), IN_PROCESS.name())
+        return orderRepository.findByConfirmation_NameAndStatus_Name(
+                CONFIRMED.name(), IN_PROCESS.name())
                 .stream()
                 .map(OrderConverter::orderToDTO)
                 .toList();
