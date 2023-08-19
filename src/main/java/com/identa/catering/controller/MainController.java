@@ -1,5 +1,8 @@
 package com.identa.catering.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.identa.catering.entity.Order;
 import com.identa.catering.model.*;
 import com.identa.catering.model.dto.CategoryDTO;
@@ -10,6 +13,10 @@ import com.identa.catering.service.CategoryService;
 import com.identa.catering.service.OrderItemService;
 import com.identa.catering.service.OrderService;
 import com.identa.catering.service.ProductService;
+import com.identa.catering.util.Util;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,46 +25,45 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.web.util.WebUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.nio.charset.StandardCharsets.*;
+
 @Controller
-@SessionScope
 @RequestMapping("/main")
 public class MainController {
 
     private final CategoryService categoryService;
     private final ProductService productService;
     private final OrderItemService orderItemService;
-    private final OrderService orderService;
     private OrderDTO orderDTO;
     private List<CategoryDTO> categories;
-    private List<ProductDTO> products;
-    private final String redirectProducts = "redirect:/main/products";
 
     public MainController(CategoryService categoryService,
                           ProductService productService,
-                          OrderItemService orderItemService,
-                          OrderService orderService) {
+                          OrderItemService orderItemService) {
         this.categoryService = categoryService;
         this.productService = productService;
         this.orderItemService = orderItemService;
-        this.orderService = orderService;
-        initOrder();
     }
 
     @GetMapping("/products")
     public String products(@RequestParam(value = "id", required = false) Long id,
-                           Model model) {
+                           Model model,
+                           HttpServletResponse response) {
 
         CategoryDTO categoryDTO = (id == null || !categoryService.containsId(id))
                 ? categoryService.findFirst()
                 : categoryService.findById(id);
         model.addAllAttributes(getSelectObjects(categoryDTO));
+        orderDTO = (orderDTO == null) ? Util.initOrder(response, orderDTO) : orderDTO;
         return "products";
     }
 
@@ -69,43 +75,52 @@ public class MainController {
         selectObjects.put("products", categoryDTO != null
                 ? productService.findByCategory(categoryDTO)
                 : new ArrayList<>());
-        selectObjects.put("order", orderDTO);
         return selectObjects;
     }
 
     @GetMapping(value = "/displayCart")
     @ResponseBody
-    public ResponseEntity<?> displayCart() {
-        return getResult(new AjaxResponseBody());
+    public ResponseEntity<?> displayCart(HttpServletResponse response) {
+        return getResult(new AjaxResponseBody(), response);
     }
 
     @PostMapping(value = "/addProductToCart", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> addProduct(@RequestBody Item item, Errors errors) {
-        return deleteOrAddProductToCart(item, errors, false);
+    public ResponseEntity<?> addProduct(@RequestBody Item item,
+                                        Errors errors,
+                                        HttpServletRequest request,
+                                        HttpServletResponse response) {
+        return deleteOrAddProductToCart(item, errors, request, response, false);
     }
 
     @PostMapping(value = "/deleteFromCart", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> deleteFromCart(@RequestBody Item item, Errors errors) {
-        return deleteOrAddProductToCart(item, errors, true);
+    public ResponseEntity<?> deleteFromCart(@RequestBody Item item,
+                                            Errors errors,
+                                            HttpServletRequest request,
+                                            HttpServletResponse response) {
+        return deleteOrAddProductToCart(item, errors, request, response, true);
     }
 
-    private ResponseEntity<?> deleteOrAddProductToCart(Item item, Errors errors, boolean flag) {
+    private ResponseEntity<?> deleteOrAddProductToCart(Item item,
+                                                       Errors errors,
+                                                       HttpServletRequest request,
+                                                       HttpServletResponse response,
+                                                       boolean flag) {
+        orderDTO = Util.getOrderDTOFromCookie(request);
         AjaxResponseBody result = new AjaxResponseBody();
-        ResponseEntity<?> response = checkErrors(item, errors, result);
-        if (response != null) return response;
+        ResponseEntity<?> responseEntity = checkErrors(item, errors, result);
+        if (responseEntity != null) return responseEntity;
 
         List<OrderItemDTO> orderItemDTOS = orderDTO.getOrderItems();
         ProductDTO productDTO = productService.findById(item.getId());
-
 
         if (flag) deleteOrderItem(orderItemDTOS, productDTO);
         else addOrderItem(orderItemDTOS, productDTO);
 
         orderDTO.setSum(orderItemService.calculateItemsSum(orderItemDTOS));
 
-        return getResult(result);
+        return getResult(result, response);
     }
 
     private ResponseEntity<?> checkErrors(Item item,
@@ -151,35 +166,12 @@ public class MainController {
         }
     }
 
-    @GetMapping("/checkout")
-    public String checkout(Model model) {
-        if (orderDTO.getOrderItems().isEmpty())
-            return redirectProducts;
-        model.addAttribute("order", orderDTO);
-        return "checkout";
-    }
-
-    @GetMapping("/approve")
-    public String approveOrder(Model model) {
-        if (orderDTO.getOrderItems().isEmpty())
-            return redirectProducts;
-        Order order = orderService.save(orderDTO);
-        model.addAttribute("orderId", order.getId());
-        initOrder();
-        return "message";
-    }
-
-    private void initOrder() {
-        orderDTO = new OrderDTO();
-        orderDTO.setOrderItems(new ArrayList<>());
-    }
-
-    private ResponseEntity<?> getResult(AjaxResponseBody result) {
+    private ResponseEntity<?> getResult(AjaxResponseBody result, HttpServletResponse response) {
+        Util.saveOrderDTOAsCookie(response, orderDTO);
         result.setResult(orderDTO);
         result.setMsg("Success");
         return ResponseEntity.ok(result);
     }
-
 
 
 }
