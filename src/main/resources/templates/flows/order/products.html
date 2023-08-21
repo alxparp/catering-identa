@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<head th:replace="fragments/head :: head(title='Вибір страв')"></head>
+
+<body>
+<div id="wrapper">
+  <div id="welcome">
+    <a th:href="@{/}"><img th:src="@{/img/logo.jpg}" alt=""></a>
+  </div>
+  <div id="leftPanel">
+    <div id="productList">
+      <h3>Категорії страв</h3>
+      <ul>
+        <th:block th:each="category: ${categories}">
+          <li><a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_personal&categoryId=' + ${category.getId()}}"
+                 th:text="${category.name}">First</a></li>
+        </th:block>
+      </ul>
+    </div>
+
+    <div id="cart" th:if="${!orderDTO.getOrderItems().isEmpty()}">
+      <h3>Кошик з продуктами</h3>
+      <div class="cartProduct" th:each="orderItem: ${orderDTO.getOrderItems()}">
+        <div class="cartProductDescription">
+          <img th:src="@{'/img/' + ${orderItem.getProductDTO().getImg()}}" alt="">
+          <a>
+            <span th:text="${orderItem.getProductDTO().getName()}"></span> <br>
+            <span th:text="${'Ціна ' + orderItem.getProductDTO().getPrice() + ' грн'}"></span> <br>
+            <span th:text="${'Кількість: ' + orderItem.getQuantity()}"></span>
+          </a>
+        </div>
+        <a class="close" th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_deleteFromCart&productId=' + ${orderItem.getProductDTO().getId()}}">X</a>
+      </div>
+      <p class="totalPrice">Разом: <span th:text="${orderDTO.getSum() + ' грн'}"></span></p>
+    </div>
+  </div>
+
+  <div id="rightPanel">
+    <div class="alert alert-danger" th:if="${!#arrays.isEmpty(flowRequestContext.messageContext.getMessagesBySource('productExist'))}">
+      <span th:each="err : ${flowRequestContext.messageContext.getMessagesBySource('productExist')}" th:text="${err.text}"></span>
+    </div>
+    <div id="products">
+      <div class="product" th:each="product: ${products}">
+        <p><img th:src="@{${'/img/' + product.getImg()}}"></p>
+        <h4 th:text="${product.getName()}">Борщ український зі сметаною</h4>
+        <p th:text="${'Ціна ' + product.getPrice() + ' грн'}" class="price">Ціна 210 грн</p>
+        <a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_addToCart&productId=' + ${product.getId()}}">Додати в кошик</a>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+  </div>
+  <div id="nextButton">
+    <a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_home'}">Назад</a>
+    <a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_checkout'}">Далі</a>
+  </div>
+  <div class="clear"></div>
+</div>
+
+</body>
+</html>

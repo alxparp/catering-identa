@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+    <on-start>
+        <evaluate expression="orderHandler.initCategory()"
+                  result="flowScope.globalCategory" />
+        <evaluate expression="orderHandler.init()"
+                  result="flowScope.orderDTO" />
+    </on-start>
+
+    <view-state id="personal" view="flows/order/products" model="orderDTO" >
+        <on-entry>
+            <evaluate result="viewScope.products"
+                      expression="orderHandler.getProducts(requestParameters.categoryId, globalCategory)" />
+
+            <evaluate result="viewScope.categories"
+                      expression="categoryService.findAll()" />
+        </on-entry>
+        <transition on="personal" to="personal" />
+        <transition on="addToCart" to="addToCart" />
+        <transition on="deleteFromCart" to="deleteFromCart" />
+        <transition on="checkout" to="checkoutAction" />
+    </view-state>
+
+    <action-state id="addToCart">
+        <evaluate expression="orderHandler.addProduct(orderDTO, requestParameters.productId, messageContext)" />
+        <transition on="success" to="personal" />
+        <transition on="failure" to="personal" />
+    </action-state>
+
+    <action-state id="deleteFromCart">
+        <evaluate expression="orderHandler.deleteProduct(orderDTO, requestParameters.productId, messageContext)" />
+        <transition on="success" to="personal" />
+        <transition on="failure" to="personal" />
+    </action-state>
+
+    <action-state id="checkoutAction">
+        <evaluate expression="orderHandler.checkout(orderDTO, messageContext)" />
+        <transition on="success" to="checkout" />
+        <transition on="failure" to="personal" />
+    </action-state>
+
+    <view-state id="checkout" view="flows/order/checkout" model="orderDTO">
+        <transition on="personal" to="personal" />
+        <transition on="approveOrder" to="approveOrder" />
+    </view-state>
+
+    <action-state id="approveOrder">
+        <evaluate expression="orderHandler.approveOrder(orderDTO)" />
+        <transition on="personal" to="personal" />
+        <transition on="message" to="message" />
+    </action-state>
+
+    <end-state id="message" view="flows/order/message" />
+    <end-state id="home" view="externalRedirect:contextRelative:/" />
+
+    <global-transitions>
+        <transition on="home" to="home" validate="false" />
+    </global-transitions>
+
+</flow>

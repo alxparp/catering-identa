@@ -326,3 +326,8 @@
 .order h3 .doneNotif {
     color: blue;
 }
+
+.alert-danger {
+    color: red;
+    margin-bottom: 20px;
+}
