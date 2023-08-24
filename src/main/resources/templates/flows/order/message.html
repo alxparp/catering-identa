@@ -1,20 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Повідомлення</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
+
+<head th:replace="fragments/head :: head(title='Повідомлення')"></head>
+
 <body>
 <div id="wrapper">
     <div id="welcome">
-        <a href=""><img th:src="@{/img/logo.jpg}" alt=""></a>
+        <a th:href="@{/}"><img th:src="@{/img/logo.jpg}" alt=""></a>
     </div>
     <div id="notification">
         <h3>Повідомлення</h3>
         <p>
             <span>Ваше замовлення обробляється: </span>
-            <span th:text="${'№' + orderId}"></span>
+            <span th:text="${'№' + orderDTO.getId()}"></span>
             </p>
         <a th:href="@{/}">Завершити</a>
         <div class="clear"></div>

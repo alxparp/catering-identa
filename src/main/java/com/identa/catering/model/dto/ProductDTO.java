@@ -6,16 +6,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductDTO {
+public class ProductDTO implements Serializable {
 
     private Long id;
     private String name;
     private Double price;
     private String img;
-    private Category category;
+    private CategoryDTO category;
 
 }

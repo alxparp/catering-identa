@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Адмін - всі замовлення</title>
-  <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
+
+<head th:replace="fragments/head :: head(title='Адмін - всі замовлення')"></head>
+
 <body>
 <div id="wrapper">
   <div id="welcome">
-    <a href=""><img src="img/logo.jpg" alt=""></a>
+    <a th:href="@{/admin}"><img th:src="@{/img/logo.jpg}" alt=""></a>
   </div>
 
   <div id="notConfirmed"></div>
