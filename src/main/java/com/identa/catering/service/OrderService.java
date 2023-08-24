@@ -41,14 +41,14 @@ public class OrderService {
     }
 
     public List<OrderDTO> findNotConfirmed() {
-        return orderRepository.findByConfirmationNull()
+        return orderRepository.findByConfirmationNullOrderByIdDesc()
                 .stream()
                 .map(OrderConverter::orderToDTO)
                 .toList();
     }
 
     public List<OrderDTO> findConfirmed() {
-        return orderRepository.findByConfirmation_NameAndStatus_Name(
+        return orderRepository.findByConfirmation_NameAndStatus_NameOrderByIdDesc(
                 CONFIRMED.name(), IN_PROCESS.name())
                 .stream()
                 .map(OrderConverter::orderToDTO)
@@ -56,7 +56,7 @@ public class OrderService {
     }
 
     public List<OrderDTO> findDone() {
-        return orderRepository.findByStatus_Name(DONE.name())
+        return orderRepository.findByStatus_NameOrderByIdDesc(DONE.name())
                 .stream()
                 .map(OrderConverter::orderToDTO)
                 .toList();

@@ -56,7 +56,7 @@ class OrderServiceTest {
 
     @Test
     void findNotConfirmed() {
-        when(orderRepository.findByConfirmationNull()).thenReturn(List.of(order));
+        when(orderRepository.findByConfirmationNullOrderByIdDesc()).thenReturn(List.of(order));
 
         List<OrderDTO> orderDTOSActual = orderService.findNotConfirmed();
 
@@ -65,7 +65,7 @@ class OrderServiceTest {
 
     @Test
     void findConfirmed() {
-        when(orderRepository.findByConfirmation_NameAndStatus_Name(anyString(), anyString())).thenReturn(List.of(order));
+        when(orderRepository.findByConfirmation_NameAndStatus_NameOrderByIdDesc(anyString(), anyString())).thenReturn(List.of(order));
 
         List<OrderDTO> orderDTOSActual = orderService.findConfirmed();
 
@@ -74,7 +74,7 @@ class OrderServiceTest {
 
     @Test
     void findDone() {
-        when(orderRepository.findByStatus_Name(anyString())).thenReturn(List.of(order));
+        when(orderRepository.findByStatus_NameOrderByIdDesc(anyString())).thenReturn(List.of(order));
 
         List<OrderDTO> orderDTOSActual = orderService.findDone();
 
