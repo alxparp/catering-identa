@@ -10,12 +10,27 @@
     <div id="notification">
         <h3>Повідомлення</h3>
         <p>
-            <span>Ваше замовлення обробляється: </span>
+            <span id="orderHandling">Ваше замовлення обробляється: </span>
             <span th:text="${'№' + orderDTO.getId()}"></span>
-            </p>
+        </p>
         <a th:href="@{/}">Завершити</a>
         <div class="clear"></div>
     </div>
 </div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    var userOrder = /*[[${orderDTO.getId()}]]*/ 'default';
+    console.log(userOrder);
+
+    /*]]>*/
+    document.addEventListener("DOMContentLoaded", function() {
+        websocketConnect(userOrder);
+    });
+</script>
+<script type="text/javascript" src="webjars/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="/js/websocket.js"></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
 </body>
 </html>

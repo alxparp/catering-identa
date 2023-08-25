@@ -1,4 +1,4 @@
-package com.identa.catering.config;
+package com.identa.catering.webflow;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

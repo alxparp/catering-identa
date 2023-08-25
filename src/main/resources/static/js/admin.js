@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     getNotConfirmedOrders();
+    var username = "admin";
+    websocketAdminConnect(username);
 });
 
 function getNotConfirmedOrders() {
@@ -38,7 +40,7 @@ function getNotConfirmedOrders() {
                 result += "</tbody>";
                 result += "</table>";
                 result += "<div class='decision'>";
-                result += "<a href='/admin/approveOrder?id=" + value.id + "'>Підтвердити</a>";
+                result += "<a id='approveAdmin' class='" + value.id + "' href='/admin/approveOrder?id=" + value.id + "'>Підтвердити</a>";
                 result += "<a href='/admin/declineOrder?id=" + value.id + "'>Відмінити</a>";
                 result += "</div>";
                 result += "<div class='clear'></div>";
@@ -50,4 +52,13 @@ function getNotConfirmedOrders() {
     });
 };
 
-setInterval(getNotConfirmedOrders, 10000);
+$(document).ready(function() {
+    $('#notConfirmed').on('click', '#approveAdmin', function(event) {
+        event.preventDefault();
+        var userId = $(this).attr('class');
+        console.log("User id equals: " + userId);
+        var href = this.href;
+        sendAdminMessage(userId);
+        window.location = href;
+    });
+});
