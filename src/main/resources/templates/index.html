@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Початкова сторінка</title>
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
-</head>
+
+<head th:replace="fragments/head :: head(title='Початкова сторінка')"></head>
+
 <body>
     <div id="wrapper">
         <div id="welcome">
-            <a><img th:src="@{/img/logo.jpg}" alt=""></a>
+            <a th:href="@{/}"><img th:src="@{/img/logo.jpg}" alt=""></a>
         </div>
         <div class="start">
-            <a th:href="@{/main/products}">Почати покупку</a>
+            <a th:href="@{/order}">Почати покупку</a>
         </div>
     </div>
 </body>

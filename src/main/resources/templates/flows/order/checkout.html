@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Підтвердження замовлення</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
+
+<head th:replace="fragments/head :: head(title='Підтверження замовлення')"></head>
+
 <body>
 <div id="wrapper">
     <div id="welcome">
-        <a href=""><img th:src="@{/img/logo.jpg}" alt=""></a>
+        <a th:href="@{/}"><img th:src="@{/img/logo.jpg}" alt=""></a>
     </div>
     <div class="order">
         <h3>Ваше замовлення</h3>
@@ -20,7 +17,7 @@
             </tr>
             </thead>
             <tbody>
-            <th:block th:each="item: ${order.getOrderItems()}">
+            <th:block th:each="item: ${orderDTO.getOrderItems()}">
                 <tr>
                     <td>
                         <span th:text="${item.getProductDTO().name}"></span>
@@ -31,13 +28,13 @@
             </th:block>
             <tr>
                 <td>Сума</td>
-                <td th:text="${order.getSum() + ' грн'}"></td>
+                <td th:text="${orderDTO.getSum() + ' грн'}"></td>
             </tr>
             </tbody>
         </table>
         <div class="buttons">
-            <a th:href="@{/main/products}">Назад</a>
-            <a th:href="@{/main/approve}">Підтвердити замовлення</a>
+            <a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_personal'}">Назад</a>
+            <a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_approveOrder'}">Підтвердити замовлення</a>
         </div>
         <div class="clear"></div>
     </div>

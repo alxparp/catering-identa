@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Адмін - всі замовлення</title>
-  <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
+
+<head th:replace="fragments/head :: head(title='Адмін - всі замовлення')"></head>
+
 <body>
 <div id="wrapper">
   <div id="welcome">
-    <a href=""><img src="img/logo.jpg" alt=""></a>
+    <a th:href="@{/admin}"><img th:src="@{/img/logo.jpg}" alt=""></a>
   </div>
 
   <div id="notConfirmed"></div>
@@ -56,7 +53,11 @@
 
   <script type="text/javascript"
           src="webjars/jquery/2.2.4/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/websocket.js"></script>
   <script type="text/javascript" src="/js/admin.js"></script>
+<!--  <script src="/webjars/jquery/dist/jquery.min.js"></script>-->
+  <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+  <script src="/webjars/stomp-websocket/stomp.min.js"></script>
 </div>
 </body>
 </html>

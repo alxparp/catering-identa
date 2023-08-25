@@ -11,7 +11,7 @@ public class ProductConverter {
                 .name(product.getName())
                 .price(product.getPrice())
                 .img(product.getImg())
-                .category(product.getCategory())
+                .category(CategoryConverter.categoryToDTO(product.getCategory()))
                 .build();
     }
 
@@ -21,7 +21,7 @@ public class ProductConverter {
                 .name(productDTO.getName())
                 .price(productDTO.getPrice())
                 .img(productDTO.getImg())
-                .category(productDTO.getCategory())
+                .category(CategoryConverter.DTOToCategory(productDTO.getCategory()))
                 .build();
     }
 
