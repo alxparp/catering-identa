@@ -14,7 +14,9 @@
 * Maven
 * Spring Boot
     - Data JPA
-    - Web
+    - MVC (+COOKIE - "cookie" branch)
+    - WebFlow ("webflow" branch)
+    - WebSocket ("websocket" branch)
     - Test
     - Profiling
 * Hibernate
